@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" charset="utf-8">
+  <head>
+    <title>Onespan test</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+  </head>
+  <body>
+    <h1> Onespan Test Sandbox</h1>
+    <form enctype="multipart/form-data" action="{{ url_for('create_signing_session')}}" method="post">
+      <label for="document">Document:</label>
+      <input type="file" name="document" id="document"><br/>
+      <label for="firstName">First Name:</label>
+      <input type="text" name="firstName" placeholder="First Name"><br/>
+      <label for="lastName">Last Name:</label>
+      <input type="text" name="lastName" placeholder="Last Name"><br/>
+      <label for="email">Email:</label>
+      <input type="email" name="email" placeholder="Email"><br/>
+      <br/>
+      <fieldset class="authFields">
+        <legend>Require Extra Authentication</legend>
+        <input type="radio" name="extraAuth" id="noAuth" value="None" checked>
+        <label for="noAuth">None</label><br/>
+        <input type="radio" name="extraAuth" value="question" id="addSecretQuestion">
+        <label for="addSecretQuestion">Add Secret Question&nbsp;</label><br/>
+        <input type="radio" name="extraAuth" value="sms" id="requireSMS">
+        <label for="requireSMS">Require SMS Verification&nbsp;</label><br/>
+        <fieldset id="secretQuestion">
+          <legend>Secret Question</legend>
+          <label for="question">Question:</label>
+          <input type="text" name="question" placeholder="Question">
+          <label for="answer">Answer:</label>
+          <input type="text" name="answer" placeholder="Answer"><br/>
+        </fieldset>
+        <fieldset id="smsNumber">
+          <legend>SMS Verification</legend>
+          <label for="phoneNumber">PhoneNumber:</label>
+          <input type="text" name="phoneNumber" placeholder="Phone Number">
+        </fieldset>
+      </fieldset>
+      <input type="submit" value="Create Signing Session">
+    </form>
+  </body>
+</html>

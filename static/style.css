@@ -1,0 +1,48 @@
+/* Reset default styles */
+body, h1, p {
+    margin: 15px;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Set font and background color */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Style headings */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Style paragraphs */
+p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Style links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.authFields fieldset {
+    display: none;
+  }
+
+  #addSecretQuestion:checked ~ #secretQuestion,
+  #requireSMS:checked ~ #smsNumber {
+    display: block;
+  }
+
