@@ -1,6 +1,10 @@
 # To start
-docker build --tag onespan-sandbox .
+`cp credentials.ini.example credentials.ini`
 
-docker run -d -p 3000:5000 onespan-sandbox
+_Add valid onespan credentials to_ `credentials.ini`
 
-visit http://localhost:3000
+`docker build --tag onespan-sandbox .`
+
+`docker run -d -p 3000:5000 onespan-sandbox`
+
+visit `http://localhost:3000`
