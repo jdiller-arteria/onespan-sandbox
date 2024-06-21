@@ -59,7 +59,7 @@ class Client(object):
 
         print (json.dumps(package, indent=4))
         #send the package
-        debug_requests_on()
+        #debug_requests_on()
         req = requests.post(self._base_url + '/packages',
                                headers={'Authorization': 'Basic ' + self._api_key,
                                         'Content-Type': 'application/json',

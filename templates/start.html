@@ -7,15 +7,20 @@
   <body>
     <h1> Onespan Test Sandbox</h1>
     <form enctype="multipart/form-data" action="{{ url_for('create_signing_session')}}" method="post">
-      <label for="document">Document:</label>
-      <input type="file" name="document" id="document"><br/>
-      <label for="firstName">First Name:</label>
-      <input type="text" name="firstName" placeholder="First Name"><br/>
-      <label for="lastName">Last Name:</label>
-      <input type="text" name="lastName" placeholder="Last Name"><br/>
-      <label for="email">Email:</label>
-      <input type="email" name="email" placeholder="Email"><br/>
-      <br/>
+      <fieldset>
+        <label for="document">Document:</label>
+        <input type="file" name="document" id="document" required><br/>
+      </fieldset>
+      <fieldset>
+        <legend>Recipient Details</legend>
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" placeholder="First Name" required><br/>
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastName" placeholder="Last Name" required><br/>
+        <label for="email">Email:</label>
+        <input type="email" name="email" placeholder="Email" required><br/>
+        <br/>
+      </fieldset>
       <fieldset class="authFields">
         <legend>Require Extra Authentication</legend>
         <input type="radio" name="extraAuth" id="noAuth" value="None" checked>
@@ -27,7 +32,7 @@
         <fieldset id="secretQuestion">
           <legend>Secret Question</legend>
           <label for="question">Question:</label>
-          <input type="text" name="question" placeholder="Question">
+          <input type="text" name="question" placeholder="Question"><br/>
           <label for="answer">Answer:</label>
           <input type="text" name="answer" placeholder="Answer"><br/>
         </fieldset>

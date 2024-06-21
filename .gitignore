@@ -1,2 +1,3 @@
 *.pyc
 credentials.ini
+__pycache__/.
