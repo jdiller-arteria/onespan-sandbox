@@ -9,15 +9,19 @@ class Client(object):
     def __init__(self):
         cp = ConfigParser()
         cp.read('credentials.ini')
+        #TODO: fail nicely if the config file is missing
         self._api_key = cp.get('onespan', 'api_key')
         self._client_id = cp.get('onespan', 'client_id')
         self._base_url = 'https://sandbox.esignlive.com/api'
 
     def create_package(self, first_name, last_name, email, doc, questions=[], sms_verification=None):
+        # build up a dict that will be sent as json to onespan
+        # to create a package
         signer = {'email': email,
                   'firstName': first_name,
                   'lastName': last_name,
                   'company': 'Acme Inc.'}
+        # we can require questions or sms verification or neither but not both
         if questions:
             signer['auth'] = {
                 'scheme': 'CHALLENGE',
@@ -33,6 +37,8 @@ class Client(object):
                 ]
             }
 
+        #this is where the signing box will go
+        #in a real document you'd want to calculate it based on the document
         field = {'page':0,
                  'top': 100,
                  'subtype':'FULLNAME',
@@ -42,6 +48,10 @@ class Client(object):
                  'type': 'SIGNATURE'
                 }
 
+        #the onespan docs say to send the docs themselves as a multipart request but
+        #the swagger says to send it as base64 encoded in the json
+        #I couldn't get the form data to work so I'm sending it as base64
+        #which works just fine
         documents = {'approvals': [{'role': 'Role1', 'fields':[field]}],
                      'name':doc.filename,
                      'base64Content': base64.b64encode(doc.stream.read()).decode('utf-8'),
@@ -59,6 +69,8 @@ class Client(object):
 
         print (json.dumps(package, indent=4))
         #send the package
+        #uncomment the next line to see the raw http request and response in the
+        #debug console
         #debug_requests_on()
         req = requests.post(self._base_url + '/packages',
                                headers={'Authorization': 'Basic ' + self._api_key,

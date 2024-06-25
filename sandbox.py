@@ -2,10 +2,12 @@ from flask import Flask, render_template, render_template_string, request, redir
 from onespan.client import Client
 app = Flask(__name__, static_folder="static")
 
+#displays the one form
 @app.route("/")
 def hello_world():
     return render_template("start.html")
 
+#receives the form data
 @app.route("/create_signing_session", methods=["POST"])
 def create_signing_session():
     first_name = request.form.get('firstName')
@@ -15,6 +17,7 @@ def create_signing_session():
     extra_auth = request.form.get('extraAuth')
     sms_verification = None
     questions = None
+    #TODO: fail nicely if the form is missing required data
 
     if extra_auth == 'question':
         question = request.form.get('question')
@@ -33,5 +36,7 @@ def create_signing_session():
         return render_template_string("{{content}}", content=package.text)
     package_id = package.json()['id']
     signing_url = onespan_client.get_signing_url(package_id)
+
+    #load a page with the onespan box in an iframe
     return render_template("signing_session.html", signing_url=signing_url.json()['url'])
 
